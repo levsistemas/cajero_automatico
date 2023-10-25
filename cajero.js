@@ -54,6 +54,10 @@ if(PIN1==PIN2) {
                 retirarDinero()
                 function retirarDinero(){
                     retirar_dinero=parseInt(prompt('Escriba el número de la cantidad a retirar (100,200,300,500,1000...)'))
+                    if(retirar_dinero<=0){
+                        console.log('No se puede ingresar un valor monetario negativo o igual a cero')
+                        retirarDinero()
+                    }
                     var decimal=parseFloat(retirar_dinero/100)
                     if(!Number.isInteger(decimal)){
                         console.log('Debes seleccionar multiplos de 100. Seleccionaste ' + retirar_dinero)
@@ -78,9 +82,22 @@ if(PIN1==PIN2) {
                 break
             case 2:
                 console.log('Ingresando dinero')
-                const INGRESAR_DINERO=parseInt(prompt('Escriba el número de la cantidad a ingresar'))
-                console.log('Usted esta ingresando $' + INGRESAR_DINERO + ' de una caja de ahorros con $' + saldo + ' disponible')
-                saldo=saldo+INGRESAR_DINERO
+                var ingresar_dinero=0
+                verificarDinero()
+                function verificarDinero(){
+                    ingresar_dinero=parseInt(prompt('Escriba el número de la cantidad a ingresar'))
+                    if(ingresar_dinero<=0){
+                        console.log('No se puede ingresar un valor monetario negativo o igual a cero')
+                        verificarDinero()
+                    }
+                    var decimal=parseFloat(ingresar_dinero/100)
+                    if(!Number.isInteger(decimal)){
+                        console.log('Debes seleccionar multiplos de 100. Seleccionaste ' + ingresar_dinero)
+                        verificarDinero()
+                    }
+                }
+                console.log('Usted esta ingresando $' + ingresar_dinero + ' de una caja de ahorros con $' + saldo + ' disponible')
+                saldo=saldo+ingresar_dinero
                 console.log('El estado actual de su caja de ahorros en pesos es de $' + saldo)
                 var respuesta=prompt('¿Desea continuar operando? si/no').toLowerCase()
                 if(respuesta=='si'){
